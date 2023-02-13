@@ -1,4 +1,4 @@
-import { TMovie } from "@/types/Movie";
+import { TMovie } from "@/types/movie";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { InferGetServerSidePropsType } from "next/types";
