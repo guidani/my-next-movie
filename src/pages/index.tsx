@@ -1,6 +1,5 @@
 import { OpenInNew } from "@mui/icons-material";
 import {
-  Divider,
   List,
   ListItem,
   ListItemButton,
@@ -31,7 +30,6 @@ type TPopularResponse = {
 };
 
 export const getServerSideProps = async () => {
-
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}`
   );
@@ -63,27 +61,24 @@ export default function Home({
 
         <List>
           {data?.results?.map((item: TPopularMovie) => (
-            <>
-              <ListItem
-                key={item.id}
-                sx={{
-                  width: "100%",
-                  maxWidth: 360,
-                  bgcolor: "background.paper",
-                }}
-              >
-                <ListItemText primary={`${item.title}`} />
-                <Link href={`/movie/${item.id}`}>
-                  <ListItemText primary="Ver filme" />
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <OpenInNew />
-                    </ListItemIcon>
-                  </ListItemButton>
-                </Link>
-              </ListItem>
-              <Divider variant="inset" component="li" />
-            </>
+            <ListItem
+              key={item.id}
+              // sx={{
+              //   width: "100%",
+              //   maxWidth: 360,
+              //   bgcolor: "#f2f2f2",
+              // }}
+            >
+              <ListItemText primary={`${item.title}`} />
+              <Link href={`/movie/${item.id}`}>
+                <ListItemText primary="Ver filme" />
+                <ListItemButton>
+                  <ListItemIcon>
+                    <OpenInNew />
+                  </ListItemIcon>
+                </ListItemButton>
+              </Link>
+            </ListItem>
           ))}
         </List>
       </main>

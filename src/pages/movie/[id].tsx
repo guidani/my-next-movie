@@ -24,15 +24,15 @@ export const getServerSideProps = async (context: NextPageContext) => {
 };
 
 export default function Movie(
-  data: InferGetServerSidePropsType<typeof getServerSideProps>
+  {id, title}: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   return (
     <div>
       Movie <Link href={"/"}>Go Back</Link>
       <hr />
       <ul>
-        <li>ID: {data.id}</li>
-        <li>Título: {data.title}</li>
+        <li>ID: {id}</li>
+        <li>Título: {title}</li>
       </ul>
     </div>
   );
