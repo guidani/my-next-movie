@@ -1,3 +1,12 @@
+import { OpenInNew } from "@mui/icons-material";
+import {
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import { Inter } from "@next/font/google";
 import { InferGetServerSidePropsType } from "next";
 
@@ -49,13 +58,31 @@ export default function Home({
       <main>
         <h1>Filmes Populares</h1>
 
-        <ul>
+        <List>
           {results.map((item, index) => (
-            <li key={index}>
-              {item.title} | <Link href={`/movie/${item.id}`}>Ver filme</Link>{" "}
-            </li>
+            <>
+              <ListItem
+                key={index}
+                sx={{
+                  width: "100%",
+                  maxWidth: 360,
+                  bgcolor: "background.paper",
+                }}
+              >
+                <ListItemText primary={`${item.title}`} />
+                <Link href={`/movie/${item.id}`}>
+                  <ListItemText primary='Ver filme' />
+                  <ListItemButton >
+                    <ListItemIcon>
+                      <OpenInNew />
+                    </ListItemIcon>
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+              <Divider variant="inset" component="li" />
+            </>
           ))}
-        </ul>
+        </List>
       </main>
     </>
   );
