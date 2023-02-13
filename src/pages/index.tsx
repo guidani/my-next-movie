@@ -1,9 +1,41 @@
 import { Inter } from "@next/font/google";
+import { InferGetServerSidePropsType } from "next";
+
 import Head from "next/head";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+type TPopularMovie = {
+  id: number;
+  title: string;
+  overview: string;
+  release_date: string;
+  vote_average: number;
+};
+
+type TPopularResponse = {
+  page: number;
+  results: TPopularMovie[];
+  total_pages: number;
+  total_results: number;
+};
+
+export const getServerSideProps = async () => {
+  const response = await fetch(
+    `${process.env.apiPopularMoviesURL}${process.env.apiKey}`
+  );
+  const data: TPopularResponse = await response.json();
+  return {
+    props: {
+      results: data.results,
+    },
+  };
+};
+
+export default function Home({
+  results,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Head>
@@ -15,7 +47,15 @@ export default function Home() {
         <meta name="description" content="Made with next.js" />
       </Head>
       <main>
-        <h1>My next movie</h1>
+        <h1>Filmes Populares</h1>
+
+        <ul>
+          {results.map((item, index) => (
+            <li key={index}>
+              {item.title} | <Link href={`/movie/${item.id}`}>Ver filme</Link>{" "}
+            </li>
+          ))}
+        </ul>
       </main>
     </>
   );
