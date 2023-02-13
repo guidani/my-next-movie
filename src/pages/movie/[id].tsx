@@ -13,7 +13,7 @@ export const getServerSideProps = async (context: queryProps) => {
   const { id } = context.query;
 
   const response = await fetch(
-    `${process.env.apiSingleMovieURL}${id}${process.env.apiKey}`
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.API_KEY}`
   );
   const data: TMovie = await response.json();
   return {
@@ -27,8 +27,7 @@ export const getServerSideProps = async (context: queryProps) => {
 export default function Movie(
   data: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
-  const router = useRouter();
-  console.log(router.query.id);
+  
   return (
     <div>
       Movie <Link href={"/"}>Go Back</Link>

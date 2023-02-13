@@ -31,13 +31,12 @@ type TPopularResponse = {
 };
 
 export const getServerSideProps = async () => {
+
   const response = await fetch(
-    `${process.env.API_POPULAR_MOVIES_URL}${process.env.API_KEY}`
+    `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}`
   );
 
   const data = await response.json();
-
-  console.log(data)
 
   return {
     props: {
@@ -63,10 +62,10 @@ export default function Home({
         <h1>Filmes Populares</h1>
 
         <List>
-          {data?.results?.map((item, index) => (
+          {data?.results?.map((item: TPopularMovie) => (
             <>
               <ListItem
-                key={index}
+                key={item.id}
                 sx={{
                   width: "100%",
                   maxWidth: 360,
