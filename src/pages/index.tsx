@@ -32,18 +32,22 @@ type TPopularResponse = {
 
 export const getServerSideProps = async () => {
   const response = await fetch(
-    `${process.env.apiPopularMoviesURL}${process.env.apiKey}`
+    `${process.env.API_POPULAR_MOVIES_URL}${process.env.API_KEY}`
   );
-  const data: TPopularResponse = await response.json();
+
+  const data = await response.json();
+
+  console.log(data)
+
   return {
     props: {
-      results: data.results,
+      data,
     },
   };
 };
 
 export default function Home({
-  results,
+  data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
@@ -59,7 +63,7 @@ export default function Home({
         <h1>Filmes Populares</h1>
 
         <List>
-          {results.map((item, index) => (
+          {data?.results?.map((item, index) => (
             <>
               <ListItem
                 key={index}
@@ -71,8 +75,8 @@ export default function Home({
               >
                 <ListItemText primary={`${item.title}`} />
                 <Link href={`/movie/${item.id}`}>
-                  <ListItemText primary='Ver filme' />
-                  <ListItemButton >
+                  <ListItemText primary="Ver filme" />
+                  <ListItemButton>
                     <ListItemIcon>
                       <OpenInNew />
                     </ListItemIcon>
