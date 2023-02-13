@@ -1,7 +1,6 @@
 import { TMovie } from "@/types/movie";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { InferGetServerSidePropsType } from "next/types";
+import { InferGetServerSidePropsType, NextPageContext } from "next/types";
 
 type queryProps = {
   query: {
@@ -9,7 +8,7 @@ type queryProps = {
   };
 };
 
-export const getServerSideProps = async (context: queryProps) => {
+export const getServerSideProps = async (context: NextPageContext) => {
   const { id } = context.query;
 
   const response = await fetch(
@@ -27,7 +26,6 @@ export const getServerSideProps = async (context: queryProps) => {
 export default function Movie(
   data: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
-  
   return (
     <div>
       Movie <Link href={"/"}>Go Back</Link>
