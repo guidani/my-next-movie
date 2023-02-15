@@ -1,5 +1,6 @@
-import { Container } from "@mui/material";
 import React from "react";
+import Footer from "./footer";
+import Navbar from "./navbar";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -7,16 +8,10 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <Container>
-      <nav>
-        <ul>
-          <li>Item</li>
-          <li>Item</li>
-          <li>Item</li>
-        </ul>
-      </nav>
+    <React.Fragment>
+      <Navbar />
       {children}
-      <footer>Lorem ipsum dolor sit amet. </footer>
-    </Container>
+      <Footer/>
+    </React.Fragment>
   );
 }
