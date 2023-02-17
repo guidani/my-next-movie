@@ -4,6 +4,7 @@ import {
   Box,
   IconButton,
   InputAdornment,
+  Link,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -15,9 +16,16 @@ const Navbar = () => {
       <AppBar component="nav" position="static">
         <Toolbar>
           <Box flexGrow="1">
-            <Typography component="h6" fontSize="2rem">
-              My Next Movie
+            <Typography component="h6" fontSize={{ xs: "1rem", md: "4rem" }}>
+              <Link href="/" color="inherit" underline="none">
+                My Next Movie
+              </Link>
             </Typography>
+          </Box>
+          <Box flexGrow={1}>
+            <Link href="/my-list" underline="none" sx={{ color: "white" }}>
+              Minha Lista
+            </Link>
           </Box>
           <Box
             component="form"
