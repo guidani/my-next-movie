@@ -1,15 +1,20 @@
-import { FavoriteOutlined } from "@mui/icons-material";
-import PlaylistAddCircleOutlinedIcon from "@mui/icons-material/PlaylistAddCircleOutlined";
-import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import {
+  Bookmark,
+  BookmarkBorder,
+  Favorite,
+  FavoriteBorder,
+} from "@mui/icons-material";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {
   Card,
   CardActions,
   CardContent,
   CardMedia,
+  Checkbox,
   Container,
   Divider,
   Grid,
-  IconButton,
   Typography,
 } from "@mui/material";
 import { InferGetServerSidePropsType } from "next";
@@ -23,13 +28,6 @@ type TPopularMovie = {
   release_date: string;
   vote_average: number;
   poster_path: string;
-};
-
-type TPopularResponse = {
-  page: number;
-  results: TPopularMovie[];
-  total_pages: number;
-  total_results: number;
 };
 
 export const getServerSideProps = async () => {
@@ -65,7 +63,7 @@ export default function Home({
             Filmes Populares
           </Typography>
           <Divider sx={{ margin: "1rem 0rem" }} />
-          <Grid container spacing={2}>
+          <Grid container spacing={2} mb={4}>
             {data?.results?.map((item: TPopularMovie) => (
               <Grid item key={item.id} xs={6} sm={3} md={2}>
                 <Card>
@@ -81,15 +79,21 @@ export default function Home({
                     {/* <Button size="small">
                       ver mais<Link href={`/movie/${item.id}`}></Link>
                     </Button> */}
-                    <IconButton>
-                      <FavoriteOutlined />
-                    </IconButton>
-                    <IconButton>
-                      <PlaylistAddCircleOutlinedIcon />
-                    </IconButton>
-                    <IconButton >
-                      <CheckCircleOutlinedIcon/>
-                    </IconButton>
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      onClick={() => console.log("favoritado")}
+                    />
+                    <Checkbox
+                      icon={<BookmarkBorder />}
+                      checkedIcon={<Bookmark />}
+                      onClick={() => console.log("Assistir mais tarde")}
+                    />
+                    <Checkbox
+                      icon={<CheckCircleOutlineIcon />}
+                      checkedIcon={<CheckCircleIcon />}
+                      onClick={() => console.log("asd")}
+                    />
                   </CardActions>
                 </Card>
               </Grid>
