@@ -1,6 +1,6 @@
 import { TMovie } from "@/types/movie";
+import { Divider, List, ListItem, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 import { InferGetServerSidePropsType, NextPageContext } from "next/types";
 
 type queryProps = {
@@ -32,30 +32,44 @@ export default function Movie({
   title,
   overview,
   vote_average,
-  poster_path
+  poster_path,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div>
-      Movie <Link href={"/"}>Go Back</Link>
-      <hr />
-      <Image src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={"capa do filme"} width={320} height={480}/>
-      <ul>
-        {/* <li>ID: {id}</li> */}
-        <li>
-          <h3>Título</h3>
-          {title}
-        </li>
+      <Stack
+        direction={"row"}
+        spacing={4}
+        divider={<Divider orientation="vertical" flexItem />}
+      >
+        <Image
+          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+          alt={"capa do filme"}
+          width={320}
+          height={480}
+        />
+        <List>
+          <ListItem>
+            <Typography variant="h6" component="p" sx={{ mr: 4 }}>
+              Título
+            </Typography>
+            <p>{title}</p>
+          </ListItem>
 
-        <li>
-          <h3>Nota média</h3>
-          <p>{vote_average}</p>
-        </li>
+          <ListItem>
+            <Typography variant="h6" component="p" sx={{ mr: 4 }}>
+              Nota média
+            </Typography>
+            <p>{vote_average}</p>
+          </ListItem>
 
-        <li>
-          <h3>Overview:</h3>
-          <p>{overview}</p>
-        </li>
-      </ul>
+          <ListItem>
+            <Typography variant="h6" component="p" sx={{ mr: 4 }}>
+              Overview:
+            </Typography>
+            <p>{overview}</p>
+          </ListItem>
+        </List>
+      </Stack>
     </div>
   );
 }
