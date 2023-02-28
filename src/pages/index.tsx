@@ -12,7 +12,7 @@ export const getServerSideProps = async () => {
 
   const data = await response.json();
   const results: TPopularMovie[] = data?.results;
-  console.log(results);
+  // console.log(results);
 
   return {
     props: {

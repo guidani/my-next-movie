@@ -16,6 +16,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import Link from "next/link";
 
 type Props = {
   data: TPopularMovie[];
@@ -51,6 +52,7 @@ const CustomGrid = ({ data }: Props) => {
                 checkedIcon={<CheckCircleIcon />}
                 onClick={() => console.log("asd")}
               />
+              <Link href={`/movie/${item.id}`}>Ver</Link>
             </CardActions>
           </Card>
         </Grid>

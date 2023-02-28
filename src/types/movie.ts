@@ -11,4 +11,5 @@ export type TMovie = {
   runtime: number;
   status: string;
   vote_average: number;
+  poster_path: string | null;
 };
