@@ -23,6 +23,21 @@ type Props = {
 };
 
 const CustomGrid = ({ data }: Props) => {
+  async function addToFavorite(id) {
+    console.log(
+      "🚀 ~ file: CustomGrid.tsx:27 ~ addToFavorite ~ id:",
+      typeof id
+    );
+
+    const response = await fetch("/api/add-favorite", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(id),
+    });
+  }
+
   return (
     <Grid container spacing={2} mb={4}>
       {data?.map((item: TPopularMovie) => (
@@ -34,13 +49,15 @@ const CustomGrid = ({ data }: Props) => {
               image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
             />
             <CardContent>
-              <Typography component={'p'} variant='h6'>{item.title}</Typography>
+              <Typography component={"p"} variant="h6">
+                {item.title}
+              </Typography>
             </CardContent>
             <CardActions>
               <Checkbox
                 icon={<FavoriteBorder />}
                 checkedIcon={<Favorite />}
-                onClick={() => console.log("favoritado")}
+                onClick={() => addToFavorite(item.id)}
               />
               <Checkbox
                 icon={<BookmarkBorder />}
