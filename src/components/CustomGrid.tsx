@@ -27,14 +27,14 @@ const CustomGrid = ({ data }: Props) => {
     <Grid container spacing={2} mb={4}>
       {data?.map((item: TPopularMovie) => (
         <Grid item key={item.id} xs={6} sm={3} md={2}>
-          <Card>
+          <Card variant="outlined">
             <CardMedia
               component="img"
               width="100%"
               image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
             />
             <CardContent>
-              <Typography>{item.title}</Typography>
+              <Typography component={'p'} variant='h6'>{item.title}</Typography>
             </CardContent>
             <CardActions>
               <Checkbox

@@ -13,10 +13,10 @@ import TextField from "@mui/material/TextField";
 const Navbar = () => {
   return (
     <Box sx={{ flexGrow: 1, backgroundColor: "primary.dark" }}>
-      <AppBar component="nav" position="static">
+      <AppBar component="nav" position="static" >
         <Toolbar>
           <Box flexGrow="1">
-            <Typography component="h6" fontSize={{ xs: "1rem", md: "4rem" }}>
+            <Typography component="h6">
               <Link href="/" color="inherit" underline="none">
                 My Next Movie
               </Link>

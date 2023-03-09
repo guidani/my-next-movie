@@ -1,5 +1,5 @@
 import { TMovie } from "@/types/movie";
-import { Divider, List, ListItem, Stack, Typography } from "@mui/material";
+import { Chip, Divider, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { InferGetServerSidePropsType, NextPageContext } from "next/types";
 
@@ -35,41 +35,36 @@ export default function Movie({
   poster_path,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <div>
-      <Stack
-        direction={"row"}
-        spacing={4}
-        divider={<Divider orientation="vertical" flexItem />}
-      >
-        <Image
-          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-          alt={"capa do filme"}
-          width={320}
-          height={480}
-        />
-        <List>
-          <ListItem>
-            <Typography variant="h6" component="p" sx={{ mr: 4 }}>
-              Título
-            </Typography>
-            <p>{title}</p>
-          </ListItem>
-
-          <ListItem>
-            <Typography variant="h6" component="p" sx={{ mr: 4 }}>
-              Nota média
-            </Typography>
-            <p>{vote_average}</p>
-          </ListItem>
-
-          <ListItem>
-            <Typography variant="h6" component="p" sx={{ mr: 4 }}>
-              Overview:
-            </Typography>
-            <p>{overview}</p>
-          </ListItem>
-        </List>
-      </Stack>
-    </div>
+    <Stack
+      direction={"column"}
+      paddingX={{xs: 2, md:20}}
+      alignItems={"center"}
+      divider={<Divider orientation="vertical" flexItem />}
+      sx={{ marginTop: "1rem" }}
+    >
+      <Image
+        src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+        alt={"capa do filme"}
+        width={320}
+        height={480}
+      />
+      <p>Botões de ação vão aqui</p>
+      <Divider />
+      <Typography variant="h6" component="p" align="left">
+        {title}
+      </Typography>
+      <Divider variant="middle">
+        <Chip label="Nota" />
+      </Divider>
+      <Typography variant="h6" component="p">
+        {vote_average.toFixed(2)}
+      </Typography>
+      <Divider variant="middle">
+        <Chip label="Overview" />
+      </Divider>
+      <Typography variant="h6" component="p">
+        {overview}
+      </Typography>
+    </Stack>
   );
 }
